@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+case "${BASH_SOURCE[0]}" in
+  */*) script_dir="${BASH_SOURCE[0]%/*}" ;;
+  *) script_dir="." ;;
+esac
+skill_dir="$(cd -- "${script_dir}/../skills/using-pragma" && pwd)"
+context="The using-pragma skill is included below. Apply it directly; resolve relative links from: ${skill_dir}
+
+$(<"${skill_dir}/SKILL.md")"
+
+context=${context//\\/\\\\}
+context=${context//\"/\\\"}
+context=${context//$'\n'/\\n}
+context=${context//$'\r'/\\r}
+context=${context//$'\t'/\\t}
+
+printf '{"hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":"%s"}}\n' "$context"

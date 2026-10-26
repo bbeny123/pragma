@@ -1,0 +1,9 @@
+{
+  "name": "pragma",
+  "version": "1.0.0",
+  "description": "Practical agent skills for design, coding, review, research, and session continuity.",
+  "author": {
+    "name": "ch1re"
+  },
+  "license": "MIT"
+}
